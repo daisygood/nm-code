@@ -1,0 +1,5 @@
+1) Changed 'logger' to 'Logger' since it is a class
+2) Added return statement in 'log' function
+3) Added returns after message logged in order to test if messages were logged in the correct color
+
+

@@ -5,7 +5,7 @@ const LEVELS = {
     DEBUG: 'debug'
 };
 
-function logger(config) {
+function Logger(config) {
     this.root = config.root || 'root';
 
     if (config.format) {
@@ -17,7 +17,7 @@ function logger(config) {
     }
 }
 
-logger.prototype = {
+Logger.prototype = {
 
     log(data, level) {
         this.level = level;
@@ -27,7 +27,7 @@ logger.prototype = {
 
         const message = this.format(logObj);
 
-        this.transport(level, message);
+        return this.transport(level, message);
     },
 
     createLogObject() {
@@ -53,19 +53,23 @@ logger.prototype = {
 
         if (level == 'error') {
             console.log(chalk.red(message));
+            return chalk.red(message);
         }
         else if (level == 'warning') {
             console.log(chalk.yellow(message));
+            return chalk.yellow(message);
         }
         else if (level == 'debug') {
             console.log(chalk.blue(message));
+            return chalk.blue(message);
         }
         else {
             //the default is info
             console.log(chalk.green(message));
+            return chalk.green(message);
         }
 
     }
 }
 
-module.exports = { logger, LEVELS };
+module.exports = { Logger, LEVELS };
